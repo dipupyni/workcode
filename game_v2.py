@@ -1,37 +1,28 @@
-#@title Текст заголовка по умолчанию
 """Игра угадай число
 Компьютер сам загадывает и сам угадывает число
 """
 
 import numpy as np
-import statistics
 
-def random_predict(number:int=np.random.randint(1, 101)) -> int:
+
+def random_predict(number: int = 1) -> int:
     """Рандомно угадываем число
 
     Args:
-        number (int, optional): Загаданное число. По умолчанию рандомно загадывается компьютером в диапазоне 1-100.
+        number (int, optional): Загаданное число. Defaults to 1.
 
     Returns:
-        int: Число попыток 
+        int: Число попыток
     """
     count = 0
-    lst_num = list(range(1, 101))
 
     while True:
-      count += 1
-      predict_number = int(np.mean(lst_num))
-      half = round(int(len(lst_num))/2)
-      if number == predict_number:
-        break
-      elif predict_number < number:
-        lst_num = lst_num[half:]  
-      else:
-        lst_num = lst_num[:half]
-      if len(lst_num) == 0:
-        break
-
+        count += 1
+        predict_number = np.random.randint(1, 101)  # предполагаемое число
+        if number == predict_number:
+            break  # выход из цикла если угадали
     return count
+
 
 def score_game(random_predict) -> int:
     """За какое количство попыток в среднем за 1000 подходов угадывает наш алгоритм
